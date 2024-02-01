@@ -19,9 +19,13 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Entry Placeholder="Username" />
+            <Entry
+                x:Name="UsernameEntry"
+                Placeholder="Username" />
 
-            <Entry Placeholder="Password" />
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password" />
 
             <Button
                 x:Name="LogInBtn"

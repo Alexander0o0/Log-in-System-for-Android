@@ -17,7 +17,12 @@ namespace Login_Android
 
         private void LogInFunction(object sender, EventArgs e)
         {
+            string username = UsernameEntry.Text;
 
+            if (username == "user")
+            {
+                db_class.();
+            }
         }
         
         private void SignUpFunction(object sender, EventArgs e)
