@@ -38,7 +38,7 @@
                 x:Name="SingUpBtn"
                 Text="Sign up"
                 SemanticProperties.Hint="Signs the user up"
-                Clicked="SignUpFunction"
+                 Clicked="LogInFunction"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
