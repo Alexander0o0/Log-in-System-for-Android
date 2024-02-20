@@ -11,49 +11,35 @@ namespace Login_Android
 {
     public partial class MainPage : ContentPage
     {
-        string username = "";
-        string password = "";
+        string? username = null;
+        string? password = null;
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private void LogInFunction(object sender, EventArgs e)
         {
-            Console.WriteLine("Reached Login function");
-            username = UsernameEntry.Text;
-            db_class.create_db();
+            string username = UsernameEntry.Text;
+            string password = PasswordEntry.Text;
 
-        }
-    }
-}
-        /*
-            if (username == "admin")
+            if (username == "Admin" && password == "1234")
             {
-                db_class.create_db();
-                //db_class.add_data();
-                List<String> entries = db_class.get_data();
-                foreach (var entry in entries)
-                {
-                    DisplayAlert("Alert", entry, "OK");
-                }
-
-                DisplayAlert("Alert", "No more data in table", "OK");
-
-                db_class.delete_data("Original data .. ");
+                Navigation.PushAsync(new Home());
             }
             else
             {
-                DisplayAlert("Alert", "You are not admin", "OK");
+                // Deny access
+                DisplayAlert("Error", "Invalid username or password", "OK");
             }
+
+
         }
-        
         private void SignUpFunction(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new SignUp());
         }
     }
-
 }
-
-            */
+            

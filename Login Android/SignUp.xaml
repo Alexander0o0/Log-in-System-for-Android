@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Login_Android.SignUp"
+             NavigationPage.HasBackButton="False">
+
+    <VerticalStackLayout            
+            Padding="30,0"
+            Spacing="25">
+        <Label 
+               Text="Enter your details"
+               Style="{StaticResource SubHeadline}"
+               SemanticProperties.HeadingLevel="Level2"
+               SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+        
+        <Entry
+                x:Name="FirstNameEntry"
+                Placeholder="FirstName" />
+
+        <Entry
+                x:Name="SecondNameEntry"
+                Placeholder="Surname" />
+
+        <Entry 
+            x:Name="UsernameEntry"
+            Placeholder="Username" />
+
+        <Entry 
+            x:Name="PasswordEntry"
+            Placeholder="Password" />
+
+        <Entry 
+            x:Name="ReEnterPasswordEntry"
+            Placeholder="Re-enter Password" />
+
+        <Button
+                x:Name="SignUpBtn"
+                Text="Sign Up" 
+                SemanticProperties.Hint="Signs up the user"
+                Clicked="SaveUserDataFunction"
+                HorizontalOptions="Fill" />
+
+    </VerticalStackLayout>
+</ContentPage>
