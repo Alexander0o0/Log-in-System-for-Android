@@ -27,11 +27,13 @@
 
         <Entry 
             x:Name="PasswordEntry"
-            Placeholder="Password" />
+            Placeholder="Password" 
+            IsPassword="True"/>
 
         <Entry 
             x:Name="ReEnterPasswordEntry"
-            Placeholder="Re-enter Password" />
+            Placeholder="Re-enter Password"
+            IsPassword="True"/>
 
         <Button
                 x:Name="SignUpBtn"

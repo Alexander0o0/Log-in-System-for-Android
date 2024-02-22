@@ -31,23 +31,35 @@ namespace Login_Android
 
         private async void LogInFunction(object sender, EventArgs e)
         {
-            string username = UsernameEntry.Text;
-            string password = PasswordEntry.Text;
+            string enteredUsername = UsernameEntry.Text;
+            string enteredPassword = PasswordEntry.Text;
 
-            var userData = await _connection.Table<UserData>().FirstOrDefaultAsync();
+            // Retrieve all users from the database
+            var allUsers = await _connection.Table<UserData>().ToListAsync();
 
-            if (username == userData.Username && password == userData.Password)
+            // Check if any user's username and password match the entered credentials
+            bool isLoggedIn = false;
+            foreach (var user in allUsers)
             {
-                Navigation.PushAsync(new Home());
+                if (enteredUsername == user.Username && enteredPassword == user.Password)
+                {
+                    isLoggedIn = true;
+                    break;
+                }
+            }
+
+            if (isLoggedIn)
+            {
+                // If credentials match, navigate to Home page
+                await Navigation.PushAsync(new Home());
             }
             else
             {
-                // Deny access
-                DisplayAlert("Error", "Invalid username or password", "OK");
+                // If credentials don't match, display an error message
+                await DisplayAlert("Error", "Invalid username or password", "OK");
             }
-
-
         }
+
         private void SignUpFunction(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SignUp());

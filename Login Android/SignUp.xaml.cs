@@ -24,31 +24,57 @@ namespace Login_Android
 
         private async void SaveUserDataFunction(object sender, EventArgs e)
         {
-            // Create or update user data
-            var userData = new UserData
+
+            if (PasswordEntry.Text != ReEnterPasswordEntry.Text)
             {
-                FirstName = FirstNameEntry.Text,
-                SecondName = SecondNameEntry.Text,
-                Username = UsernameEntry.Text,
-                Password = PasswordEntry.Text
-            };
+                await DisplayAlert("Error", "Make sure you enter your password twice", "OK");
 
-            // Insert or replace user data
-            await _connection.InsertOrReplaceAsync(userData);
+                PasswordEntry.Text = null;
+                ReEnterPasswordEntry.Text = null;
+            }
+            else
+            {
 
-            // Optionally, display a confirmation message
-            await DisplayAlert("Success", "User data saved successfully", "OK");
+                // Get all existing usernames from the database
+                var existingUsers = await _connection.Table<UserData>().ToListAsync();
+
+                bool usernameExists = false;
+
+                // Check if the entered username already exists
+                foreach (var user in existingUsers)
+                {
+                    if (user.Username == UsernameEntry.Text)
+                    {
+                        usernameExists = true;
+                        break;
+                    }
+                }
+
+                if (usernameExists)
+                {
+                    // If username already exists, display an error message
+                    await DisplayAlert("Error", "Username already exists. Please choose a different one.", "OK");
+                }
+                else
+                {
+                    // Create new user data
+                    var newUser = new UserData
+                    {
+                        FirstName = FirstNameEntry.Text,
+                        SecondName = SecondNameEntry.Text,
+                        Username = UsernameEntry.Text,
+                        Password = PasswordEntry.Text
+                    };
+
+                    // Insert new user
+                    await _connection.InsertAsync(newUser);
+
+                    // Optionally, display a confirmation message
+                    await DisplayAlert("Success", "User data saved successfully", "OK");
+
+                    Navigation.PushAsync(new MainPage());
+                }
+            }
         }
-    }
-
-    // Model class for user data
-    public class UserData
-    {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

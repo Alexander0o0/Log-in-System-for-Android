@@ -4,44 +4,55 @@
              x:Class="Login_Android.MainPage"
              NavigationPage.HasBackButton="False">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Label
-                Text="Logging System"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+        <!-- Your image -->
+        <Image Grid.Row="0" Source="background.jpg" Aspect="AspectFit" />
 
-            <Label
-                Text="Enter your Username and Password"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+        <!-- Your other content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30,0" Spacing="25">
+                <Label
+                    Text="Log-in System"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" />
 
-            <Entry
-                x:Name="UsernameEntry"
-                Placeholder="Username" />
+                <Label
+                    Text="Enter your Username and Password"
+                    Style="{StaticResource SubHeadline}"
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Entry
-                x:Name="PasswordEntry"
-                Placeholder="Password" />
+                <Entry
+                    x:Name="UsernameEntry"
+                    Placeholder="Username" />
 
-            <Button
-                x:Name="LogInBtn"
-                Text="Log in" 
-                SemanticProperties.Hint="Logs in the user"
-                Clicked="LogInFunction"
-                HorizontalOptions="Fill" />
+                <Entry
+                    x:Name="PasswordEntry"
+                    Placeholder="Password" 
+                    IsPassword="True"/>
 
-            <Button
-                x:Name="SingUpBtn"
-                Text="Sign up"
-                SemanticProperties.Hint="Signs the user up"
-                 Clicked="SignUpFunction"
-                HorizontalOptions="Fill" />
-        </VerticalStackLayout>
-    </ScrollView>
+                <Button
+                    x:Name="LogInBtn"
+                    Text="Log in"
+                    SemanticProperties.Hint="Logs in the user"
+                    Clicked="LogInFunction"
+                    HorizontalOptions="Fill"
+                    BackgroundColor="#FF6347" />
+
+                <Button
+                    x:Name="SignUpBtn"
+                    Text="Sign up"
+                    SemanticProperties.Hint="Signs the user up"
+                    Clicked="SignUpFunction"
+                    HorizontalOptions="Fill"
+                    BackgroundColor="#FF6347" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 
 </ContentPage>
