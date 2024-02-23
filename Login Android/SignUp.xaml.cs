@@ -39,40 +39,61 @@ namespace Login_Android
                 var existingUsers = await _connection.Table<UserData>().ToListAsync();
 
                 bool usernameExists = false;
+                bool emailExists = false;
 
                 // Check if the entered username already exists
                 foreach (var user in existingUsers)
                 {
-                    if (user.Username == UsernameEntry.Text)
+                    if (user.UserEmail == EmailEntry.Text)
                     {
-                        usernameExists = true;
+                        emailExists = true;
                         break;
                     }
                 }
 
-                if (usernameExists)
+                if (emailExists)
                 {
-                    // If username already exists, display an error message
-                    await DisplayAlert("Error", "Username already exists. Please choose a different one.", "OK");
+                    // If email already exists, display an error message
+                    await DisplayAlert("Error", "Email already exists. Please choose a different one.", "OK");
+
+                    EmailEntry.Text = null;
                 }
                 else
                 {
-                    // Create new user data
-                    var newUser = new UserData
+                    if (usernameExists)
                     {
-                        FirstName = FirstNameEntry.Text,
-                        SecondName = SecondNameEntry.Text,
-                        Username = UsernameEntry.Text,
-                        Password = PasswordEntry.Text
-                    };
+                        // If username already exists, display an error message
+                        await DisplayAlert("Error", "Username already exists. Please choose a different one.", "OK");
 
-                    // Insert new user
-                    await _connection.InsertAsync(newUser);
 
-                    // Optionally, display a confirmation message
-                    await DisplayAlert("Success", "User data saved successfully", "OK");
+                    }
+                    else
+                    {
+                        // Create new user data
+                        var newUser = new UserData
+                        {
+                            FirstName = FirstNameEntry.Text,
+                            SecondName = SecondNameEntry.Text,
+                            UserEmail = EmailEntry.Text,
+                            Username = UsernameEntry.Text,
+                            Password = PasswordEntry.Text
+                        };
 
-                    Navigation.PushAsync(new MainPage());
+                        // Insert new user
+                        await _connection.InsertAsync(newUser);
+
+                        // Optionally, display a confirmation message
+                        await DisplayAlert("Success", "User data saved successfully", "OK");
+
+                        FirstNameEntry.Text = null;
+                        SecondNameEntry.Text = null;
+                        EmailEntry.Text = null;
+                        UsernameEntry.Text = null;
+                        PasswordEntry.Text = null;
+                        ReEnterPasswordEntry = null;
+
+                        Navigation.PushAsync(new MainPage());
+                    }
                 }
             }
         }

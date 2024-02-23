@@ -5,17 +5,12 @@
              NavigationPage.HasBackButton="False">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
         <!-- Your image -->
-        <Image Grid.Row="0" Source="background.jpg" Aspect="AspectFit" />
+        <Image Source="background.jpg" Aspect="AspectFill" />
 
         <!-- Your other content -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="30,0" Spacing="25">
+        <ScrollView>
+            <VerticalStackLayout Padding="30" Spacing="25">
                 <Label
                     Text="Log-in System"
                     Style="{StaticResource Headline}"
@@ -51,6 +46,14 @@
                     Clicked="SignUpFunction"
                     HorizontalOptions="Fill"
                     BackgroundColor="#FF6347" />
+
+                <Button 
+                    x:Name="ForgotPassBtn"
+                    Text="Forgot Password?"
+                    SemanticProperties.Hint="Helps reset password"
+                    Clicked="ForgotPasswordFunction"
+                    HorizontalOptions="Fill"
+                    Background="Transparent"/>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

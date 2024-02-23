@@ -4,43 +4,52 @@
              x:Class="Login_Android.SignUp"
              NavigationPage.HasBackButton="False">
 
-    <VerticalStackLayout            
-            Padding="30,0"
-            Spacing="25">
-        <Label 
-               Text="Enter your details"
-               Style="{StaticResource SubHeadline}"
-               SemanticProperties.HeadingLevel="Level2"
-               SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-        
-        <Entry
+    <!-- Grid to hold the background image and content -->
+    <Grid>
+        <!-- Background image -->
+        <Image Source="background.jpg" Aspect="AspectFill" />
+
+        <!-- Content stack layout -->
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <Label 
+                Text="Enter your details"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Entry
                 x:Name="FirstNameEntry"
                 Placeholder="FirstName" />
 
-        <Entry
+            <Entry
                 x:Name="SecondNameEntry"
                 Placeholder="Surname" />
+            <Entry 
+                x:Name="EmailEntry"
+                Placeholder="Email"/>
 
-        <Entry 
-            x:Name="UsernameEntry"
-            Placeholder="Username" />
+            <Entry 
+                x:Name="UsernameEntry"
+                Placeholder="Username" />
 
-        <Entry 
-            x:Name="PasswordEntry"
-            Placeholder="Password" 
-            IsPassword="True"/>
+            <Entry 
+                x:Name="PasswordEntry"
+                Placeholder="Password" 
+                IsPassword="True"/>
 
-        <Entry 
-            x:Name="ReEnterPasswordEntry"
-            Placeholder="Re-enter Password"
-            IsPassword="True"/>
+            <Entry 
+                x:Name="ReEnterPasswordEntry"
+                Placeholder="Re-enter Password"
+                IsPassword="True"/>
 
-        <Button
+            <Button
                 x:Name="SignUpBtn"
                 Text="Sign Up" 
                 SemanticProperties.Hint="Signs up the user"
                 Clicked="SaveUserDataFunction"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                BackgroundColor="#FF6347"  />
+        </VerticalStackLayout>
+    </Grid>
 
-    </VerticalStackLayout>
 </ContentPage>

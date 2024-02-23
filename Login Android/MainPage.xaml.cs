@@ -52,6 +52,9 @@ namespace Login_Android
             {
                 // If credentials match, navigate to Home page
                 await Navigation.PushAsync(new Home());
+
+                UsernameEntry.Text = null;
+                PasswordEntry.Text = null;
             }
             else
             {
@@ -63,6 +66,10 @@ namespace Login_Android
         private void SignUpFunction(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SignUp());
+        }
+        private void ForgotPasswordFunction(object sender, EventArgs e)
+        {
+
         }
     }
 }

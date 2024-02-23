@@ -40,9 +40,6 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiImage Include="background.jpg">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</MauiImage>
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
@@ -60,11 +57,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="BackGround\**" />
+	  <Compile Remove="BackGround\**" />
+	  <EmbeddedResource Remove="BackGround\**" />
+	  <MauiCss Remove="BackGround\**" />
+	  <MauiXaml Remove="BackGround\**" />
+	  <None Remove="BackGround\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <AndroidResource Remove="Platforms\Android\Resources\drawable\Android.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="BackGround.jpg" />
+	  <None Remove="background.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="background.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,6 +94,9 @@
 	  <Compile Update="Home.xaml.cs">
 	    <DependentUpon>Home.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="ForgotPassword.xaml.cs">
+	    <DependentUpon>ForgotPassword.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SignUp.xaml.cs">
 	    <DependentUpon>SignUp.xaml</DependentUpon>
 	  </Compile>
@@ -93,13 +106,12 @@
 	  <MauiXaml Update="Home.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ForgotPassword.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SignUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="BackGround\" />
 	</ItemGroup>
 
 </Project>
