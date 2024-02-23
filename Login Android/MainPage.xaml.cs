@@ -67,9 +67,9 @@ namespace Login_Android
         {
             Navigation.PushAsync(new SignUp());
         }
-        private void ForgotPasswordFunction(object sender, EventArgs e)
+        private async void ForgotPasswordFunction(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new ForgotPassword());
         }
     }
 }

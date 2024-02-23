@@ -1,41 +1,65 @@
+using System;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
+using SQLite;
+using Microsoft.Maui.Controls;
 
-namespace Login_Android;
-
-public partial class ForgotPassword : ContentPage
+namespace Login_Android
 {
-	public ForgotPassword()
-	{
-		InitializeComponent();
-	}
+    public partial class ForgotPassword : ContentPage
+    {
+        private SQLiteAsyncConnection _connection;
 
-	public async void SendPasswordReset(object sender, EventArgs e)
-	{
-        UserData userData = new UserData();
+        public ForgotPassword()
+        {
+            InitializeComponent();
 
-        string UsersPassword = userData.Password;
+            // Initialize SQLite connection
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserData.db3");
+            _connection = new SQLiteAsyncConnection(dbPath);
 
-        string senderEmail = "ak05259065@priestley.ac.uk";
-		string senderPassword = "x";
+            // Create UserDataTable if it doesn't exist
+            _connection.CreateTableAsync<UserData>().Wait();
+        }
 
-		string recipientEmail = ResetPasswordEmailEntry.Text;
+        public async void SendPasswordReset1(object sender, EventArgs e)
+        {
+            string senderEmail = "ak05259065@priestley.ac.uk";
+            string senderPassword = "cajb qokj hbds lfhv";
+            string recipientEmail = ResetPasswordEmailEntry.Text;
 
-		MailMessage mail = new MailMessage(senderEmail, recipientEmail);
+            if (string.IsNullOrEmpty(recipientEmail))
+            {
+                await DisplayAlert("Error", "Please enter your email", "OK");
+                return;
+            }
 
-		mail.Subject = "Your password";
-		mail.Body = UsersPassword;
+            // Retrieve user data from the database
+            UserData userData = await _connection.Table<UserData>().FirstOrDefaultAsync(u => u.UserEmail == recipientEmail);
 
-        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-        smtpClient.Port = 587;
-        smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
-        smtpClient.EnableSsl = true;
-        smtpClient.Send(mail);
+            if (userData == null)
+            {
+                await DisplayAlert("Error", "No user found with this email", "OK");
+                return;
+            }
+            string thierpassword = userData.Password;
 
-        DisplayAlert("All Good", "Your password was sent to your email", "OK");
+            MailMessage mail = new MailMessage(senderEmail, recipientEmail);
+            mail.Subject = "Your password";
+            mail.Body = thierpassword;
 
-		ResetPasswordEmailEntry.Text = null;
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.Port = 587;
+            smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
+            smtpClient.EnableSsl = true;
+            smtpClient.Send(mail);
 
-        await Navigation.PushAsync(new MainPage());
+            await DisplayAlert("All Good", "Your password was sent to your email", "OK");
+
+            ResetPasswordEmailEntry.Text = null;
+
+            await Navigation.PushAsync(new MainPage());
+        }
     }
 }
