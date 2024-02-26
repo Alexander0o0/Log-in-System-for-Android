@@ -26,7 +26,7 @@ namespace Login_Android
         public async void SendPasswordReset1(object sender, EventArgs e)
         {
             string senderEmail = "ak05259065@priestley.ac.uk";
-            string senderPassword = "cajb qokj hbds lfhv";
+            string senderPassword = "ggkf zskb tuum ewgl";
             string recipientEmail = ResetPasswordEmailEntry.Text;
 
             if (string.IsNullOrEmpty(recipientEmail))
@@ -50,10 +50,11 @@ namespace Login_Android
             mail.Body = thierpassword;
 
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-            smtpClient.Port = 587;
+            smtpClient.Port = 587; // Use 587 for Gmail
             smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
             smtpClient.EnableSsl = true;
             smtpClient.Send(mail);
+
 
             await DisplayAlert("All Good", "Your password was sent to your email", "OK");
 
