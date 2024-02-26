@@ -25,8 +25,8 @@ namespace Login_Android
 
         public async void SendPasswordReset1(object sender, EventArgs e)
         {
-            string senderEmail = "ak05259065@priestley.ac.uk";
-            string senderPassword = "ggkf zskb tuum ewgl";
+            string senderEmail = "andrewhilton2006@gmail.com";
+            string senderPassword = "ectz lkkh veiu kkoa";
             string recipientEmail = ResetPasswordEmailEntry.Text;
 
             if (string.IsNullOrEmpty(recipientEmail))
@@ -46,6 +46,7 @@ namespace Login_Android
             string thierpassword = userData.Password;
 
             MailMessage mail = new MailMessage(senderEmail, recipientEmail);
+            DisplayAlert("OK", $"{senderEmail}+ {senderPassword}", "OK");
             mail.Subject = "Your password";
             mail.Body = thierpassword;
 
@@ -55,12 +56,31 @@ namespace Login_Android
             smtpClient.EnableSsl = true;
             smtpClient.Send(mail);
 
-
             await DisplayAlert("All Good", "Your password was sent to your email", "OK");
 
             ResetPasswordEmailEntry.Text = null;
 
             await Navigation.PushAsync(new MainPage());
+
+
+            //Implement this in the system for muai email
+            if (Email.Default.IsComposeSupported)
+            {
+
+                string subject = "Hello friends!";
+                string body = "It was great to see you last weekend.";
+                string[] recipients = new[] { "john@contoso.com", "jane@contoso.com" };
+
+                var message = new EmailMessage
+                {
+                    Subject = subject,
+                    Body = body,
+                    BodyFormat = EmailBodyFormat.PlainText,
+                    To = new List<string>(recipients)
+                };
+
+                await Email.Default.ComposeAsync(message);
+            }
         }
     }
 }
